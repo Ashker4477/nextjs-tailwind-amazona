@@ -1,10 +1,15 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 export default function Layout({ title, children }) {
     const { cartItems } = useSelector((state) => state.cart);
+    const [cartItemsCount, setCartItemsCount] = useState(0);
+    useEffect(() => {
+        setCartItemsCount(cartItems.reduce((a, b) => a + b.qty, 0));
+    }, [cartItems]);
+
     return (
         <>
             <Head>
@@ -24,7 +29,7 @@ export default function Layout({ title, children }) {
                                 <a className="p-2">
                                     Cart
                                     {cartItems.length > 0 && (
-                                        <span className="ml-1 rounded-full px-2 py-1 text-xs font-bold text-white bg-red-500">{cartItems.length}</span>
+                                        <span className="ml-1 rounded-full px-2 py-1 text-xs font-bold text-white bg-red-500">{cartItemsCount}</span>
                                     )}
                                 </a>
                             </Link>

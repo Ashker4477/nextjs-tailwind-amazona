@@ -4,14 +4,21 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Layout from '../components/Layout';
 import { XCircleIcon } from '@heroicons/react/outline';
-import { RemoveFromCart } from '../actions/CartActions';
+import { AddToCart, RemoveFromCart } from '../actions/CartActions';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
-export default function CartScreen() {
+function CartScreen() {
     const dispatch = useDispatch();
+    const router = useRouter();
     const { cartItems } = useSelector((state) => state.cart);
 
     const removeItemHandler = (item) => {
         dispatch(RemoveFromCart(item));
+    };
+    const updateCartHandler = (e, item) => {
+        let qty = Number(e.target.value);
+        dispatch(AddToCart(item, qty));
     };
     return (
         <Layout title={'Shopping Cart'}>
@@ -45,7 +52,17 @@ export default function CartScreen() {
                                                     </a>
                                                 </Link>
                                             </td>
-                                            <td className="p-5 text-right">{item.qty}</td>
+                                            <td className="p-5 text-right">
+                                                <select value={item.qty} onChange={(e) => updateCartHandler(e, item)}>
+                                                    {[...Array(item.countInStock).keys()].map((x) => {
+                                                        return (
+                                                            <option key={x + 1} value={x + 1}>
+                                                                {x + 1}
+                                                            </option>
+                                                        );
+                                                    })}
+                                                </select>
+                                            </td>
                                             <td className="p-5 text-right">{item.price}</td>
                                             <td className="p-5 text-center">
                                                 <button type="button" onClick={() => removeItemHandler(item)}>
@@ -58,8 +75,24 @@ export default function CartScreen() {
                             </tbody>
                         </table>
                     </div>
+                    <div className="">
+                        <ul className="card p-5">
+                            <li>
+                                <div className="pb-3 text-xl">
+                                    Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)}) : ${cartItems.reduce((a, c) => a + c.qty * c.price, 0)}
+                                </div>
+                            </li>
+                            <li>
+                                <button onClick={() => router.push('login?redirect=/shipping')} className="primary-button w-full">
+                                    Check Out
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             )}
         </Layout>
     );
 }
+
+export default dynamic(() => Promise.resolve(CartScreen), { ssr: false });
