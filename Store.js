@@ -6,9 +6,12 @@ import thunk from 'redux-thunk';
 import { cartReducer } from './reducers/CartReducer';
 
 const initialState = {
-    cart: {
-        cartItems: Cookies.get('cartItems') ? JSON.parse(Cookies.get('cartItems')) : [],
-    },
+    cart: Cookies.get('cart')
+        ? JSON.parse(Cookies.get('cart'))
+        : {
+              cartItems: [],
+              shippingAddress: {},
+          },
 };
 
 const reducer = combineReducers({
