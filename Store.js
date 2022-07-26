@@ -11,6 +11,7 @@ const initialState = {
         : {
               cartItems: [],
               shippingAddress: {},
+              paymentMethod: '',
           },
 };
 
