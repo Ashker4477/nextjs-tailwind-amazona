@@ -32,8 +32,9 @@ export default NextAuth({
                         image: 'f',
                         isAdmin: user.isAdmin,
                     };
+                } else {
+                    throw new Error('Invalid email or Password');
                 }
-                throw new Error('Invalid email or Password');
             },
         }),
     ],

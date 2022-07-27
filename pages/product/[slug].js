@@ -4,31 +4,30 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import React from 'react';
 import Layout from '../../components/Layout';
-import data from '../../utils/data';
 import { AddToCart } from '../../actions/CartActions';
+import Product from '../../models/Product';
+import db from '../../utils/db';
+import axios from 'axios';
 
-export default function ProductScreen() {
+export default function ProductScreen(props) {
+    const { product } = props;
     const dispatch = useDispatch();
     const router = useRouter();
-    const { query } = useRouter();
-    const { slug } = query;
-    const product = data.products.find((x) => x.slug === slug);
-
     const { cartItems } = useSelector((state) => state.cart);
 
-    const AddToCartHandler = () => {
+    const AddToCartHandler = async () => {
         let existItem = cartItems.find((item) => item.slug == product.slug);
         let qty = existItem ? existItem.qty + 1 : 1;
-        if (product.countInStock < 1) {
-            alert('Product is Out of stock');
-            return;
+        const { data } = await axios.get(`/api/products/${product._id}`);
+        if (data.countInStock < 1) {
+            return toast.error('Product is Out of stock');
         }
-        dispatch(AddToCart(product, qty));
+        dispatch(AddToCart(data, qty));
         router.push('/cart');
     };
 
     if (!product) {
-        return <div>Produt Not Found</div>;
+        return <Layout title={'Produt Not Found'}>Produt Not Found</Layout>;
     }
     return (
         <Layout title={product.name}>
@@ -70,4 +69,18 @@ export default function ProductScreen() {
             </div>
         </Layout>
     );
+}
+
+export async function getServerSideProps(context) {
+    const { params } = context;
+    const { slug } = params;
+    console.log(slug);
+    await db.connect();
+    const product = await Product.findOne({ slug }, { __v: 0 }).lean();
+    await db.disconnect();
+    return {
+        props: {
+            product: product ? db.convertDocToObj(product) : '',
+        },
+    };
 }

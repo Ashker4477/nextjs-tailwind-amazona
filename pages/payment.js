@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { savePaymentMethod } from '../actions/CartActions';
+import { toast } from 'react-toastify';
 import CheckoutWizard from '../components/CheckoutWizard';
 import Layout from '../Components/Layout';
 
@@ -14,21 +15,19 @@ export default function PaymentScreen() {
     const submitHandler = (e) => {
         e.preventDefault();
         if (!selectedPaymentMethod) {
+            toast.error('Payment Method Required');
             return;
         }
         dispatch(savePaymentMethod(selectedPaymentMethod));
+        toast.success('Payment Success');
+        router.push('/placeorder');
     };
     useEffect(() => {
+        setSelectedPaymentMethod(paymentMethod);
         if (!shippingAddress) {
-            router.push('/shipping');
+            return router.push('/shipping');
         }
     }, []);
-
-    useEffect(() => {
-        if (paymentMethod) {
-            setSelectedPaymentMethod(paymentMethod);
-        }
-    }, [paymentMethod]);
 
     return (
         <Layout title={'Payment Method'}>
