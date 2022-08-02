@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, SAVE_PAYMENT_METHOD, SAVE_SHIPPING_ADDRESS } from '../Constants/CartConstants';
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, SAVE_PAYMENT_METHOD, SAVE_SHIPPING_ADDRESS } from '../constants/CartConstants';
 
 export const AddToCart = (product, qty) => (dispatch, getState) => {
     dispatch({

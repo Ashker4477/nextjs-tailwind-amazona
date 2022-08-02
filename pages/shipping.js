@@ -5,7 +5,6 @@ import CheckoutWizard from '../components/CheckoutWizard';
 import Layout from '../components/Layout';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { SAVE_SHIPPING_ADDRESS } from '../Constants/CartConstants';
 import { saveShippingAddress } from '../actions/CartActions';
 
 export default function ShippingScreen() {

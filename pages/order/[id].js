@@ -17,11 +17,9 @@ export default function OrderScreen() {
             try {
                 setLoading(true);
                 const { data } = await axios.get(`/api/orders/${orderId}`);
-                console.log(data);
                 setOrderData(data);
                 setLoading(false);
             } catch (error) {
-                console.log(orderId);
                 setLoading(false);
                 setError(getError(error));
             }
