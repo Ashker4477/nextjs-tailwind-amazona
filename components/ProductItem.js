@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -7,7 +6,7 @@ export default function ProductItem({ product, AddToCartHandler }) {
         <div className="card">
             <Link href={`/product/${product.slug}`}>
                 <a>
-                    <Image src={product.image} alt={product.name} className="rounded shadow" />
+                    <img src={product.image} alt={product.name} className="rounded shadow object-cover h-64 w-full" />
                 </a>
             </Link>
             <div className="flex flex-col items-center justify-center p-5">
