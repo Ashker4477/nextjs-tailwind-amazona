@@ -8,8 +8,8 @@ const handler = async (req, res) => {
     }
 
     const { name, email, password } = req.body;
-    if (!name || !email || !password) {
-        return res.status(400).send({ message: 'Validation error' });
+    if (!name || !email || !email.includes('@') || !password || password.trim().length < 5) {
+        return res.status(422).send({ message: 'Validation error' });
     }
 
     await db.connect();
@@ -17,7 +17,7 @@ const handler = async (req, res) => {
     const existUser = await User.findOne({ email });
     if (existUser) {
         await db.disconnect();
-        return res.send({ message: 'User already exist' });
+        return res.status(422).send({ message: 'User already exist' });
     }
 
     const newUser = new User({

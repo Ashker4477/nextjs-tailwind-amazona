@@ -3,7 +3,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import Layout from '../../Components/Layout';
+import Layout from '../../components/Layout';
 import { getError } from '../../utils/error';
 
 export default function OrderScreen() {

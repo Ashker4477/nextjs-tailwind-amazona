@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import CheckoutWizard from '../components/CheckoutWizard';
-import Layout from '../Components/Layout';
+import Layout from '../components/Layout';
 
 export default function PlaceOrderScreen() {
     const { cartItems, shippingAddress, paymentMethod } = useSelector((state) => state.cart);

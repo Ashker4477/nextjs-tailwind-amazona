@@ -1,5 +1,5 @@
 import Layout from '../components/Layout';
-import ProductItem from '../Components/ProductItem';
+import ProductItem from '../components/ProductItem';
 import db from '../utils/db';
 import Product from '../models/Product';
 import { useDispatch, useSelector } from 'react-redux';

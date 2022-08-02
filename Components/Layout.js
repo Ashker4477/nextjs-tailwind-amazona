@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Menu } from '@headlessui/react';
 import DropdownLink from './DropdownLink';
 import Cookies from 'js-cookie';
-import { CART_RESET } from '../Constants/CartConstants';
+import { CART_RESET } from '../constants/CartConstants';
 
 export default function Layout({ title, children }) {
     const { status, data: session } = useSession();
@@ -63,7 +63,7 @@ export default function Layout({ title, children }) {
                                                 </DropdownLink>
                                             </Menu.Item>
                                             <Menu.Item>
-                                                <DropdownLink className="dropdown-link" href="/order-history">
+                                                <DropdownLink className="dropdown-link" href="/order/history">
                                                     Order History
                                                 </DropdownLink>
                                             </Menu.Item>

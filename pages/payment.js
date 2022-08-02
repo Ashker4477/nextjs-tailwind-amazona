@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { savePaymentMethod } from '../actions/CartActions';
 import { toast } from 'react-toastify';
 import CheckoutWizard from '../components/CheckoutWizard';
-import Layout from '../Components/Layout';
+import Layout from '../components/Layout';
 
 export default function PaymentScreen() {
     const router = useRouter();
