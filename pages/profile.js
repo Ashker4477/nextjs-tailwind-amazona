@@ -22,7 +22,7 @@ function ProfileScreen() {
             setValue('name', session.user.name);
             setValue('email', session.user.email);
         }
-    }, []);
+    }, [session, setValue]);
 
     const submitHandler = async ({ name, email, password }) => {
         try {

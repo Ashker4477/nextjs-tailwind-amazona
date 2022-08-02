@@ -27,7 +27,7 @@ export default function PaymentScreen() {
         if (!shippingAddress) {
             return router.push('/shipping');
         }
-    }, []);
+    }, [paymentMethod, router, shippingAddress]);
 
     return (
         <Layout title={'Payment Method'}>

@@ -8,6 +8,7 @@ import { AddToCart } from '../../actions/CartActions';
 import Product from '../../models/Product';
 import db from '../../utils/db';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export default function ProductScreen(props) {
     const { product } = props;

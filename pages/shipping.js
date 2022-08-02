@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import Cookies from 'js-cookie';
 import CheckoutWizard from '../components/CheckoutWizard';
 import Layout from '../components/Layout';
 import { useRouter } from 'next/router';
@@ -18,7 +17,7 @@ export default function ShippingScreen() {
     const dispatch = useDispatch();
     // const { cart } = state;
     // const { shippingAddress } = cart;
-    const { shippingAddress, cartItems } = useSelector((state) => state.cart);
+    const { shippingAddress } = useSelector((state) => state.cart);
     const router = useRouter();
 
     useEffect(() => {

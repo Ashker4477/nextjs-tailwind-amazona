@@ -1,8 +1,8 @@
 import NextAuth from 'next-auth';
 import bcrypt from 'bcryptjs';
 import Credentials from 'next-auth/providers/credentials';
-import User from '../../../models/users';
 import db from '../../../utils/db';
+import User from '../../../models/UserModel';
 
 export default NextAuth({
     session: { strategy: 'jwt' },

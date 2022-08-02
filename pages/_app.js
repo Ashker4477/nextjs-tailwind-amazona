@@ -1,7 +1,7 @@
 import { SessionProvider, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { Provider } from 'react-redux';
-import { store, wrapper } from '../store';
+import { store, wrapper } from '../ReduxStore';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
